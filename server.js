@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const contactRoutes = require("./routes/contactRoutes");
 const quoteRoutes = require("./routes/quoteRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const referralRoutes = require("./routes/referralRoutes");
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
@@ -36,6 +37,7 @@ app.use("/api", apiLimiter);
 app.use("/api/contact", contactRoutes);
 app.use("/api/quote", quoteRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/referrals", referralRoutes);
 
 app.use((error, req, res, next) => {
   console.error(error);

@@ -30,11 +30,13 @@ function leadHtml(title, data) {
 
 async function sendLeadEmail(title, data) {
   const resend = getClient();
+  const contactName = data.name || data.referrerName || "New submission";
+  const replyTo = data.email || data.referrerEmail || undefined;
   const { data: email, error } = await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL,
     to: [process.env.NOTIFY_EMAIL],
-    replyTo: data.email || undefined,
-    subject: `${title} - ${data.name}`,
+    replyTo,
+    subject: `${title} - ${contactName}`,
     html: leadHtml(title, data),
   });
 
